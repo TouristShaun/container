@@ -1,0 +1,12 @@
+services:
+  infinity-forge:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - INFINITY_FORGE_DB=/data/infinity_forge.db
+    volumes:
+      - forge_data:/data
+
+volumes:
+  forge_data:
