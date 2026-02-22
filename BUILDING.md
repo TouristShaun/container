@@ -5,9 +5,23 @@ To build the `container` project, you need:
 - Mac with Apple silicon
 - macOS 15 minimum, macOS 26 beta recommended
 - Xcode 26 beta, set as the [active developer directory](https://developer.apple.com/library/archive/technotes/tn2339/_index.html#//apple_ref/doc/uid/DTS40014588-CH1-HOW_DO_I_SELECT_THE_DEFAULT_VERSION_OF_XCODE_TO_USE_FOR_MY_COMMAND_LINE_TOOLS_)
+- Swift 6.2 toolchain (`swift --version` should report 6.2.x)
 
 > [!IMPORTANT]
 > There is a bug in the `vmnet` framework on macOS 26 beta that causes network creation to fail if the `container` helper applications are located under your `Documents` or `Desktop` directories. If you use `make install`, you can simply run the `container` binary in `/usr/local`. If you prefer to use the binaries that `make all` creates in your project `bin` and `libexec` directories, locate your project elsewhere, such as `~/projects/container`, until this issue is resolved.
+
+## What you can validate in constrained environments
+
+If you are on a non-macOS host (for example, Linux CI) or your Swift toolchain is older than 6.2, you can still run lightweight repository checks even though `make all test integration` will not work.
+
+Useful checks:
+
+```bash
+swift --version
+bash -n scripts/*.sh
+```
+
+These checks verify local tooling visibility and shell-script syntax, but they do not compile or run `container`.
 
 ## Compile and test
 
